@@ -1,6 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-
+﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Numerics;
 using System.Text;
 using RayTracingInOneWeekend.Utility;
