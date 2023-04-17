@@ -1,7 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Diagnostics;
+using System.Numerics;
 using System.Text;
+using RayTracingInOneWeekend.Utility;
 
 class Program
 {
@@ -18,17 +20,11 @@ class Program
 
         for (int j = imageHeight - 1; j >= 0; j--)
         {
+            Console.Error.WriteLine($"\rScanLines remaining: {j}");
             for (int i = 0; i < imageWidth; i++)
             {
-                var r = (double)i / (imageWidth  - 1);
-                var g = (double)j / (imageHeight - 1);
-                var b = 0.25;
-
-                var ir = (int)(255.999 * r);
-                var ig = (int)(255.999 * g);
-                var ib = (int)(255.999 * b);
-
-                sb.AppendLine($"{ir} {ig} {ib}");
+                Vector3 pixelColor = new Vector3(i / (float)(imageWidth - 1), j / (float)(imageHeight - 1), 0.25f);
+                Color.WriteColor(sb, pixelColor);
             }
         }
 
