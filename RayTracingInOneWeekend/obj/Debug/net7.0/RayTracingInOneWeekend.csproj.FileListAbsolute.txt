@@ -1,0 +1,15 @@
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\bin\Debug\net7.0\RayTracingInOneWeekend.exe
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\bin\Debug\net7.0\RayTracingInOneWeekend.deps.json
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\bin\Debug\net7.0\RayTracingInOneWeekend.runtimeconfig.json
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\bin\Debug\net7.0\RayTracingInOneWeekend.dll
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\bin\Debug\net7.0\RayTracingInOneWeekend.pdb
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\obj\Debug\net7.0\RayTracingInOneWeekend.csproj.AssemblyReference.cache
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\obj\Debug\net7.0\RayTracingInOneWeekend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\obj\Debug\net7.0\RayTracingInOneWeekend.AssemblyInfoInputs.cache
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\obj\Debug\net7.0\RayTracingInOneWeekend.AssemblyInfo.cs
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\obj\Debug\net7.0\RayTracingInOneWeekend.csproj.CoreCompileInputs.cache
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\obj\Debug\net7.0\RayTracingInOneWeekend.dll
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\obj\Debug\net7.0\refint\RayTracingInOneWeekend.dll
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\obj\Debug\net7.0\RayTracingInOneWeekend.pdb
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\obj\Debug\net7.0\RayTracingInOneWeekend.genruntimeconfig.cache
+C:\Users\lyp\RiderProjects\RayTracingInOneWeekend\RayTracingInOneWeekend\obj\Debug\net7.0\ref\RayTracingInOneWeekend.dll
