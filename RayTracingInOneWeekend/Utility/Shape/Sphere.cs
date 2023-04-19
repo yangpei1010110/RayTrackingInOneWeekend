@@ -5,17 +5,12 @@ namespace RayTracingInOneWeekend.Utility.Shape;
 
 public class Sphere : IHittable
 {
-    public Sphere(Vector3 center, float radius)
-    {
-        Center = center;
-        Radius = radius;
-    }
-
     public Vector3 Center { get; set; }
     public float   Radius { get; set; }
 
     public bool Hit(Ray r, float tMin, float tMax, out HitRecord rec)
     {
+        // initialize rec
         rec = default(HitRecord);
 
         Vector3 oc = r.Origin - Center;
@@ -42,7 +37,8 @@ public class Sphere : IHittable
 
         rec.T = root;
         rec.Point = r.At(rec.T);
-        rec.Normal = (rec.Point - Center) / Radius;
+        Vector3 outwardNormal = (rec.Point - Center) / Radius;
+        rec.SetFaceNormal(r, outwardNormal);
 
         return true;
     }
