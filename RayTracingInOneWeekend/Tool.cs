@@ -8,11 +8,11 @@ public static class Tool
     public static float HitSphere(Vector3 center, float radius, Ray r)
     {
         Vector3 oc = r.Origin - center;
-        float a = Vector3.Dot(r.Direction, r.Direction);
-        float b = 2.0f * Vector3.Dot(oc, r.Direction);
-        float c = Vector3.Dot(oc, oc) - radius * radius;
-        float discriminant = b * b - 4 * a * c;
-        return discriminant < 0 ? -1.0f : (-b - MathF.Sqrt(discriminant)) / (2.0f * a);
+        float a = r.Direction.LengthSquared();
+        float halfB = Vector3.Dot(oc, r.Direction);
+        float c = oc.LengthSquared() - radius * radius;
+        float discriminant = halfB * halfB - a * c;
+        return discriminant < 0 ? -1.0f : (-halfB - MathF.Sqrt(discriminant)) / a;
     }
 
     public static Vector3 RayColor(Ray r)
