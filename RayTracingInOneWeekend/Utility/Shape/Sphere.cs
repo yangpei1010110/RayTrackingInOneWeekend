@@ -5,6 +5,12 @@ namespace RayTracingInOneWeekend.Utility.Shape;
 
 public class Sphere : IHittable
 {
+    public Sphere(Vector3 center, float radius)
+    {
+        Center = center;
+        Radius = radius;
+    }
+
     public Vector3 Center { get; set; }
     public float   Radius { get; set; }
 

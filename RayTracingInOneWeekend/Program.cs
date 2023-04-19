@@ -3,6 +3,8 @@ using System.Numerics;
 using System.Text;
 using RayTracingInOneWeekend;
 using RayTracingInOneWeekend.Utility;
+using RayTracingInOneWeekend.Utility.Hit;
+using RayTracingInOneWeekend.Utility.Shape;
 
 internal class Program
 {
@@ -15,6 +17,11 @@ internal class Program
         const int imageWidth = 400;
         const int imageHeight = (int)(imageWidth / aspectRatio);
         StringBuilder sb = new();
+
+        // World
+        HittableList world = new();
+        world.Add(new Sphere(new Vector3(0, 0, -1), 0.5f));
+        world.Add(new Sphere(new Vector3(0, -100.5f, -1), 100));
 
         // Camera
 
@@ -42,7 +49,7 @@ internal class Program
                 float v = j / (float)(imageHeight - 1);
 
                 Ray r = new(origin, lowerLeftCorner + u * horizontal + v * vertical - origin);
-                Vector3 pixelColor = Tool.RayColor(r);
+                Vector3 pixelColor = Tool.RayColor(r, world);
                 Color.WriteColor(sb, pixelColor);
             }
         }

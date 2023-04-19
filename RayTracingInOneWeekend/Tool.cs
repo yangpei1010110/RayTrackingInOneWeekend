@@ -1,5 +1,6 @@
 using System.Numerics;
 using RayTracingInOneWeekend.Utility;
+using RayTracingInOneWeekend.Utility.Hit;
 
 namespace RayTracingInOneWeekend;
 
@@ -15,14 +16,12 @@ public static class Tool
         return discriminant < 0 ? -1.0f : (-halfB - MathF.Sqrt(discriminant)) / a;
     }
 
-    public static Vector3 RayColor(Ray r)
+    public static Vector3 RayColor(Ray r, IHittable world)
     {
-        Vector3 sphereCenter = new(0, 0, -1);
-        float hitT = HitSphere(sphereCenter, 0.5f, r);
-        if (hitT > 0.0f)
+        HitRecord rec;
+        if (world.Hit(r, 0f, float.MaxValue, out rec))
         {
-            Vector3 n = Vector3.Normalize(r.At(hitT) - sphereCenter);
-            return 0.5f * new Vector3(n.X + 1, n.Y + 1, n.Z + 1);
+            return 0.5f * (rec.Normal + new Vector3(1));
         }
 
         Vector3 unitDirection = Vector3.Normalize(r.Direction);
