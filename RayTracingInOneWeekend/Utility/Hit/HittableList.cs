@@ -7,13 +7,12 @@ public class HittableList : IHittable
     public bool Hit(Ray r, float tMin, float tMax, out HitRecord rec)
     {
         rec = default(HitRecord);
-        HitRecord tempRec = default(HitRecord);
         bool hitAnything = false;
         float closestSoFar = tMax;
 
         foreach (IHittable obj in _objects)
         {
-            if (obj.Hit(r, tMin, closestSoFar, out tempRec))
+            if (obj.Hit(r, tMin, closestSoFar, out HitRecord tempRec))
             {
                 hitAnything = true;
                 closestSoFar = tempRec.T;

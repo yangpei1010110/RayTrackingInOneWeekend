@@ -1,27 +1,35 @@
 using System.Numerics;
 using RayTracingInOneWeekend.Utility;
+using RayTracingInOneWeekend.Utility.Extensions;
 using RayTracingInOneWeekend.Utility.Hit;
+using RayTracingInOneWeekend.Utility.Shape;
 
 namespace RayTracingInOneWeekend;
 
 public static class Tool
 {
-    public static float HitSphere(Vector3 center, float radius, Ray r)
+    public static Vector3 RandomVector3()
     {
-        Vector3 oc = r.Origin - center;
-        float a = r.Direction.LengthSquared();
-        float halfB = Vector3.Dot(oc, r.Direction);
-        float c = oc.LengthSquared() - radius * radius;
-        float discriminant = halfB * halfB - a * c;
-        return discriminant < 0 ? -1.0f : (-halfB - MathF.Sqrt(discriminant)) / a;
+        return new Vector3(Random.Shared.NextSingle(), Random.Shared.NextSingle(), Random.Shared.NextSingle());
     }
 
-    public static Vector3 RayColor(Ray r, IHittable world)
+    public static Vector3 RandomVector3(float min, float max)
+    {
+        return new Vector3(Random.Shared.NextFloat(min, max), Random.Shared.NextFloat(min, max), Random.Shared.NextFloat(min, max));
+    }
+
+    public static Vector3 RayColor(Ray r, IHittable world, int depth)
     {
         HitRecord rec;
-        if (world.Hit(r, 0f, float.MaxValue, out rec))
+        if (depth <= 0)
         {
-            return 0.5f * (rec.Normal + new Vector3(1));
+            return Vector3.Zero;
+        }
+
+        if (world.Hit(r, 0.001f, float.MaxValue, out rec))
+        {
+            Vector3 target = rec.Point + rec.Normal + Sphere.RandomInUnitSphere();
+            return 0.5f * RayColor(new Ray(rec.Point, target - rec.Point), world, depth - 1);
         }
 
         Vector3 unitDirection = Vector3.Normalize(r.Direction);

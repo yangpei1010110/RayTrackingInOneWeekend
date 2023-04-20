@@ -3,7 +3,7 @@ using RayTracingInOneWeekend.Utility.Hit;
 
 namespace RayTracingInOneWeekend.Utility.Shape;
 
-public class Sphere : IHittable
+public struct Sphere : IHittable
 {
     public Sphere(Vector3 center, float radius)
     {
@@ -47,5 +47,16 @@ public class Sphere : IHittable
         rec.SetFaceNormal(r, outwardNormal);
 
         return true;
+    }
+
+    public static Vector3 RandomInUnitSphere()
+    {
+        Vector3 p;
+        do
+        {
+            p = Tool.RandomVector3(-1f, 1f);
+        } while (p.LengthSquared() >= 1.0f);
+
+        return p;
     }
 }
