@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace RayTracingInOneWeekend.Utility;
 
-public class Ray
+public struct Ray
 {
     public Ray(Vector3 origin, Vector3 direction)
     {

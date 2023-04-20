@@ -1,21 +1,22 @@
 ﻿using System.Diagnostics;
 using System.Numerics;
 using System.Text;
-using RayTracingInOneWeekend;
 using RayTracingInOneWeekend.Utility;
 using RayTracingInOneWeekend.Utility.Hit;
 using RayTracingInOneWeekend.Utility.Shape;
+
+namespace RayTracingInOneWeekend;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
         // Image
-
-        const string filePath = @"image.ppm";
-        const float aspectRatio = 16.0f / 9.0f;
-        const int imageWidth = 400;
-        const int imageHeight = (int)(imageWidth / aspectRatio);
+        string filePath = Path.GetFullPath(@"image.ppm");
+        float aspectRatio = 16.0f / 9.0f;
+        int imageWidth = 400;
+        int imageHeight = (int)(imageWidth / aspectRatio);
+        int samplesPerPixel = 100;
         StringBuilder sb = new();
 
         // World
@@ -24,15 +25,7 @@ internal class Program
         world.Add(new Sphere(new Vector3(0, -100.5f, -1), 100));
 
         // Camera
-
-        float viewportHeight = 2.0f;
-        float viewportWidth = aspectRatio * viewportHeight;
-        float focalLength = 1.0f;
-
-        Vector3 origin = Vector3.Zero;
-        Vector3 horizontal = new(viewportWidth, 0, 0);
-        Vector3 vertical = new(0, viewportHeight, 0);
-        Vector3 lowerLeftCorner = origin - horizontal / 2 - vertical / 2 - new Vector3(0, 0, focalLength);
+        Camera camera = new();
 
         // Render
 
@@ -45,17 +38,22 @@ internal class Program
             Console.Error.WriteLine($"\rScanLines remaining: {j}");
             for (int i = 0; i < imageWidth; i++)
             {
-                float u = i / (float)(imageWidth - 1);
-                float v = j / (float)(imageHeight - 1);
+                Vector3 pixelColor = Vector3.Zero;
+                for (int s = 0; s < samplesPerPixel; s++)
+                {
+                    float u = (i + Random.Shared.NextSingle()) / (imageWidth - 1);
+                    float v = (j + Random.Shared.NextSingle()) / (imageHeight - 1);
 
-                Ray r = new(origin, lowerLeftCorner + u * horizontal + v * vertical - origin);
-                Vector3 pixelColor = Tool.RayColor(r, world);
-                Color.WriteColor(sb, pixelColor);
+                    Ray r = camera.GetRay(u, v);
+                    pixelColor += Tool.RayColor(r, world);
+                }
+
+                Color.WriteColor(sb, pixelColor, samplesPerPixel);
             }
         }
 
         File.WriteAllText(filePath, sb.ToString());
         // open the image
-        Process.Start("explorer.exe", $"/select, {Path.GetFullPath(filePath)}");
+        Process.Start("explorer.exe", $"/select, {filePath}");
     }
 }
