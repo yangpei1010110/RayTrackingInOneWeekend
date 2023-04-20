@@ -27,8 +27,16 @@ public static class Tool
 
         if (world.Hit(r, 0.001f, float.MaxValue, out rec))
         {
-            Vector3 target = rec.Point + rec.Normal + RandomUnitVector();
-            return 0.5f * RayColor(new Ray(rec.Point, target - rec.Point), world, depth - 1);
+            if (rec.Material.Scatter(r, rec, out Vector3 attenuation, out Ray scattered))
+            {
+                return attenuation * RayColor(scattered, world, depth - 1);
+            }
+            else
+            {
+                return Vector3.Zero;
+            }
+            // Vector3 target = rec.Point + rec.Normal + RandomUnitVector();
+            // return 0.5f * RayColor(new Ray(rec.Point, target - rec.Point), world, depth - 1);
         }
 
         Vector3 unitDirection = Vector3.Normalize(r.Direction);

@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Text;
 using RayTracingInOneWeekend.Utility;
 using RayTracingInOneWeekend.Utility.Hit;
+using RayTracingInOneWeekend.Utility.Mat;
 using RayTracingInOneWeekend.Utility.Shape;
 
 namespace RayTracingInOneWeekend;
@@ -14,7 +15,7 @@ internal class Program
         // Image
         string filePath = Path.GetFullPath(@"image.ppm");
         float aspectRatio = 16.0f / 9.0f;
-        int imageWidth = 400;
+        int imageWidth = 800;
         int imageHeight = (int)(imageWidth / aspectRatio);
         int samplesPerPixel = 100;
         int maxDepth = 50;
@@ -22,8 +23,16 @@ internal class Program
 
         // World
         HittableList world = new();
-        world.Add(new Sphere(new Vector3(0, 0, -1), 0.5f));
-        world.Add(new Sphere(new Vector3(0, -100.5f, -1), 100));
+
+        IMaterial materialGround = new Lambertian(new Vector3(0.8f, 0.8f, 0.0f));
+        IMaterial materialCenter = new Lambertian(new Vector3(0.7f, 0.3f, 0.3f));
+        IMaterial materialLeft = new Metal(new Vector3(0.8f, 0.8f, 0.8f), 0.3f);
+        IMaterial materialRight = new Metal(new Vector3(0.8f, 0.6f, 0.2f), 1.0f);
+
+        world.Add(new Sphere(new Vector3(0, -100.5f, -1), 100, materialGround));
+        world.Add(new Sphere(new Vector3(0, 0, -1), 0.5f, materialCenter));
+        world.Add(new Sphere(new Vector3(-1, 0, -1), 0.5f, materialLeft));
+        world.Add(new Sphere(new Vector3(1, 0, -1), 0.5f, materialRight));
 
         // Camera
         Camera camera = new();

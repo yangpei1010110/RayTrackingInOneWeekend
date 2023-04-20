@@ -1,18 +1,21 @@
 using System.Numerics;
 using RayTracingInOneWeekend.Utility.Hit;
+using RayTracingInOneWeekend.Utility.Mat;
 
 namespace RayTracingInOneWeekend.Utility.Shape;
 
 public struct Sphere : IHittable
 {
-    public Sphere(Vector3 center, float radius)
+    public Sphere(Vector3 center, float radius, IMaterial material)
     {
         Center = center;
         Radius = radius;
+        Material = material;
     }
 
-    public Vector3 Center { get; set; }
-    public float   Radius { get; set; }
+    public Vector3   Center   { get; set; }
+    public float     Radius   { get; set; }
+    public IMaterial Material { get; set; }
 
     public bool Hit(Ray r, float tMin, float tMax, out HitRecord rec)
     {
@@ -45,6 +48,7 @@ public struct Sphere : IHittable
         rec.Point = r.At(rec.T);
         Vector3 outwardNormal = (rec.Point - Center) / Radius;
         rec.SetFaceNormal(r, outwardNormal);
+        rec.Material = Material;
 
         return true;
     }
