@@ -19,7 +19,7 @@ public static class Vector3Extension
         Vector3 p;
         do
         {
-            p = new Vector3(Random.Shared.NextFloat(-1, 1), Random.Shared.NextFloat(-1, 1), 0);
+            p = new Vector3(RandomTool.NextFloat(-1, 1), RandomTool.NextFloat(-1, 1), 0);
         } while (p.LengthSquared() >= 1.0f);
 
         return p;

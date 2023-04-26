@@ -1,6 +1,5 @@
 using System.Numerics;
 using RayTracingInOneWeekend.Utility;
-using RayTracingInOneWeekend.Utility.Extensions;
 using RayTracingInOneWeekend.Utility.Hit;
 
 namespace RayTracingInOneWeekend;
@@ -9,12 +8,12 @@ public static class Tool
 {
     public static Vector3 RandomVector3()
     {
-        return new Vector3(Random.Shared.NextSingle(), Random.Shared.NextSingle(), Random.Shared.NextSingle());
+        return new Vector3(RandomTool.NextFloat(), RandomTool.NextFloat(), RandomTool.NextFloat());
     }
 
     public static Vector3 RandomVector3(float min, float max)
     {
-        return new Vector3(Random.Shared.NextFloat(min, max), Random.Shared.NextFloat(min, max), Random.Shared.NextFloat(min, max));
+        return new Vector3(RandomTool.NextFloat(min, max), RandomTool.NextFloat(min, max), RandomTool.NextFloat(min, max));
     }
 
     public static Vector3 RayColor(Ray r, IHittable world, int depth)

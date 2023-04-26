@@ -6,7 +6,7 @@ using RayTracingInOneWeekend.Utility.Hit;
 
 namespace RayTracingInOneWeekend;
 
-internal class Program
+internal static class Program
 {
     private static void Main(string[] args)
     {
@@ -15,8 +15,8 @@ internal class Program
         float aspectRatio = 3.0f / 2.0f;
         int imageWidth = 1200;
         int imageHeight = (int)(imageWidth / aspectRatio);
-        int samplesPerPixel = 512;
-        int maxDepth = 64;
+        int samplesPerPixel = 256;
+        int maxDepth = 50;
         StringBuilder sb = new();
 
         // World
@@ -53,8 +53,8 @@ internal class Program
                 // Vector3 pixelColor = Vector3.Zero;
                 for (int s = 0; s < samplesPerPixel; s++)
                 {
-                    float u = (i + Random.Shared.NextSingle()) / (imageWidth - 1);
-                    float v = (j + Random.Shared.NextSingle()) / (imageHeight - 1);
+                    float u = (i + RandomTool.NextFloat()) / (imageWidth - 1);
+                    float v = (j + RandomTool.NextFloat()) / (imageHeight - 1);
 
                     Ray r = camera.GetRay(u, v);
                     // pixelColor += Tool.RayColor(r, world);

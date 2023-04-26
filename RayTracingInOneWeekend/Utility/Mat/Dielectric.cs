@@ -19,7 +19,7 @@ public struct Dielectric : IMaterial
         float sinTheta = MathF.Sqrt(1f - cosTheta * cosTheta);
         bool cannotRefract = refractionRatio * sinTheta > 1f;
         Vector3 direction = cannotRefract
-                         || Reflectance(cosTheta, refractionRatio) > Random.Shared.NextSingle()
+                         || Reflectance(cosTheta, refractionRatio) > RandomTool.NextFloat()
             ? Vector3.Reflect(unitDirection, rec.Normal)
             : Vector3Extension.Refract(unitDirection, rec.Normal, refractionRatio);
         scattered = new Ray(rec.Point, direction);

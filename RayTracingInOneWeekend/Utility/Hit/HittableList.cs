@@ -1,5 +1,4 @@
 using System.Numerics;
-using RayTracingInOneWeekend.Utility.Extensions;
 using RayTracingInOneWeekend.Utility.Mat;
 using RayTracingInOneWeekend.Utility.Shape;
 
@@ -42,8 +41,8 @@ public class HittableList : IHittable
         {
             for (int b = -11; b < 11; b++)
             {
-                float chooseMat = Random.Shared.NextSingle();
-                Vector3 center = new(a + 0.9f * Random.Shared.NextSingle(), 0.2f, b + 0.9f * Random.Shared.NextSingle());
+                float chooseMat = RandomTool.NextFloat();
+                Vector3 center = new(a + 0.9f * RandomTool.NextFloat(), 0.2f, b + 0.9f * RandomTool.NextFloat());
 
                 if ((center - new Vector3(4, 0.2f, 0)).Length() > 0.9f)
                 {
@@ -58,7 +57,7 @@ public class HittableList : IHittable
                     {
                         // metal
                         Vector3 albedo = Tool.RandomVector3(0.5f, 1f);
-                        float fuzz = Random.Shared.NextFloat(0, 0.5f);
+                        float fuzz = RandomTool.NextFloat(0, 0.5f);
                         var sphereMaterial = new Metal(albedo, fuzz);
                         world.Add(new Sphere(center, 0.2f, sphereMaterial));
                     }
